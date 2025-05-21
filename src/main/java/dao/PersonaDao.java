@@ -1,36 +1,35 @@
-/*- save
-	- getById
-	- delete
-*/
+package dao;
 
+import entities.Evento;
+import entities.Persona;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-public class EventoDao {
+public class PersonaDao {
     private EntityManager em;
 
-    public EventoDao(){
+    public PersonaDao(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("postgres");
         em = emf.createEntityManager();
     }
 
 
-    public void salvaEvento(Evento evento){
+    public void salva(Persona persona){
         em.getTransaction().begin();
 
-        em.persist(evento);
+        em.persist(persona);
 
         em.getTransaction().commit();
     }
 
 
-    public Evento getById(int id){
-        return em.find(Evento.class, id);
+    public Persona getById(int id){
+        return em.find(Persona.class, id);
     }
 
-    public void rimuoviEvento(int id){
-        Evento e = getById(id);
+    public void rimuovi(int id){
+        Persona e = getById(id);
 
         if(e!=null){
             em.getTransaction().begin();
@@ -39,10 +38,7 @@ public class EventoDao {
 
             em.getTransaction().commit();
         } else {
-            System.out.println("evento con id: " + id + " non trovato");
+            System.out.println("persona con id: " + id + " non trovato");
         }
     }
-
-
-
 }

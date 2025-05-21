@@ -1,13 +1,19 @@
+package entities;
+// add lista partecipazione
+// add location
+import enums.TipoEvento;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
-    @Entity
+@Entity
     @Table(name = "eventi")
 
 public class Evento {
 
     @Id
+    @GeneratedValue
     private int id;
 
     @Column(length = 30, nullable = false)
@@ -25,6 +31,22 @@ public class Evento {
 
     @Column(name = "numero_massimo_partecipanti")
     private int numeroMassimoPartecipanti;
+
+    @OneToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
+
+    @OneToMany(mappedBy = "evento")
+    private List<Partecipazione> partecipazioni;
+
+
+        public Location getLocation() {
+            return location;
+        }
+
+        public void setLocation(Location location) {
+            this.location = location;
+        }
 
         public int getId() {
             return id;
@@ -74,7 +96,15 @@ public class Evento {
             this.numeroMassimoPartecipanti = numeroMassimoPartecipanti;
         }
 
-        public Evento(int id, String titolo, LocalDate dataEvento, String descrizione, TipoEvento tipoEvento, int numeroMassimoPartecipanti) {
+    public List<Partecipazione> getPartecipazioni() {
+        return partecipazioni;
+    }
+
+    public void setPartecipazioni(List<Partecipazione> partecipazioni) {
+        this.partecipazioni = partecipazioni;
+    }
+
+    public Evento(int id, String titolo, LocalDate dataEvento, String descrizione, TipoEvento tipoEvento, int numeroMassimoPartecipanti) {
             this.id = id;
             this.titolo = titolo;
             this.dataEvento = dataEvento;
@@ -85,15 +115,17 @@ public class Evento {
 
         public Evento(){}
 
-        @Override
-        public String toString() {
-            return "Evento{" +
-                    "id=" + id +
-                    ", titolo='" + titolo + '\'' +
-                    ", dataEvento=" + dataEvento +
-                    ", descrizione='" + descrizione + '\'' +
-                    ", tipoEvento=" + tipoEvento +
-                    ", numeroMassimoPartecipanti=" + numeroMassimoPartecipanti +
-                    '}';
-        }
+    @Override
+    public String toString() {
+        return "Evento{" +
+                "id=" + id +
+                ", titolo='" + titolo + '\'' +
+                ", dataEvento=" + dataEvento +
+                ", descrizione='" + descrizione + '\'' +
+                ", tipoEvento=" + tipoEvento +
+                ", numeroMassimoPartecipanti=" + numeroMassimoPartecipanti +
+                ", location=" + location +
+                ", partecipazioni=" + partecipazioni +
+                '}';
     }
+}
