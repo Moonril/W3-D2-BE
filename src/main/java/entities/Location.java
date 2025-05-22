@@ -1,20 +1,18 @@
 package entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 // location - evento 121
 // lista di eventi, se 12many, senno 1 evento
 @Entity
-@Table(name = "locations")
+@Table(name = "location")
 public class Location {
     @Id
     @GeneratedValue
     private int id;
     private String nome;
     private String citta;
+    @OneToOne(mappedBy = "location")
     private Evento evento;
 
 

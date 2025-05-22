@@ -8,7 +8,8 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Entity
-    @Table(name = "eventi")
+@Table(name = "eventi")
+@Inheritance(strategy = InheritanceType.JOINED)
 
 public class Evento {
 
@@ -104,8 +105,7 @@ public class Evento {
         this.partecipazioni = partecipazioni;
     }
 
-    public Evento(int id, String titolo, LocalDate dataEvento, String descrizione, TipoEvento tipoEvento, int numeroMassimoPartecipanti) {
-            this.id = id;
+    public Evento(String titolo, LocalDate dataEvento, String descrizione, TipoEvento tipoEvento, int numeroMassimoPartecipanti) {
             this.titolo = titolo;
             this.dataEvento = dataEvento;
             this.descrizione = descrizione;

@@ -16,6 +16,9 @@ public class EventoDao {
         em = emf.createEntityManager();
     }
 
+    public EventoDao(EntityManager em){
+        this.em = em;
+    }
 
     public void salvaEvento(Evento evento){
         em.getTransaction().begin();

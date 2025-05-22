@@ -17,10 +17,10 @@ public class Persona {
     private String email;
     @Column(name = "data_nascita")
     private LocalDate dataNascita;
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private Genere genere;
-    @OneToMany
-    @JoinColumn(name = "persona")
+    @OneToMany(mappedBy = "persona")
+    //@JoinColumn(name = "persona")
     private List<Partecipazione> partecipazioni;
 
     public Persona(String nome, String cognome, String email, LocalDate dataNascita, Genere genere) {

@@ -20,6 +20,10 @@ public class Partecipazione {
     @Enumerated
     private StatoEvento stato;
 
+    public Partecipazione(StatoEvento stato) {
+        this.stato = stato;
+    }
+
     public Partecipazione() {
     }
 
