@@ -3,11 +3,19 @@ package entities;
 import enums.TipoEvento;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.Table;
+import jdk.jfr.Name;
 
 import java.time.LocalDate;
 
 
 @Entity
+@Table(name = "partite_di_calcio")
+//named query
+@NamedQuery(name = "getPartiteVinteInCasa", query = "select p from PartitaDiCalcio p where p.golCasa>p.golOspite")
+@NamedQuery(name = "getPartiteVinteInTrasferta", query = "select p from PartitaDiCalcio p where p.golCasa<p.golOspite")
+@NamedQuery(name = "getPartitePareggiate", query = "select p from PartitaDiCalcio p where p.golCasa=p.golOspite")
 public class PartitaDiCalcio extends Evento{
 
     @Column(name = "squadra_di_casa")

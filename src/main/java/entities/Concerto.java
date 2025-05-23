@@ -4,12 +4,15 @@ import enums.GenereConcerto;
 import enums.TipoEvento;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 import java.time.LocalDate;
 
 @Entity
 public class Concerto extends Evento{
     @Column(name = "genere_concerto")
+    @Enumerated(EnumType.STRING)
     private GenereConcerto genereConcerto;
 
     @Column(name = "in_streaming")
